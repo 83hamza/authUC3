@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "90687213bc4f282dad8174b1c2a8eb8f",
+    "content-hash": "f971ab8968036e4a64155c46dba0d201",
     "packages": [
         {
             "name": "ar-php/ar-php",
