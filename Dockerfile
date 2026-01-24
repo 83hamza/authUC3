@@ -1,5 +1,23 @@
-FROM php:8.2-fpm
+FROM php:8.3-fpm
 
+# System deps
+RUN apt-get update && apt-get install -y \
+    zip \
+    unzip \
+    git \
+    libzip-dev \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    curl \
+    && docker-php-ext-install \
+    pdo_mysql \
+    zip \
+    mbstring \
+    exif \
+    pcntl \
+    bcmath \
+    gd
 # تثبيت الإضافات
 RUN apt-get update && apt-get install -y \
     git unzip libpng-dev libjpeg-dev libfreetype6-dev \
