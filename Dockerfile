@@ -2,40 +2,27 @@ FROM php:8.3-fpm
 
 # System deps
 RUN apt-get update && apt-get install -y \
-    zip \
-    unzip \
-    git \
-    libzip-dev \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    curl \
-    && docker-php-ext-install \
-    pdo_mysql \
-    zip \
-    mbstring \
-    exif \
-    pcntl \
-    bcmath \
-    gd
-# تثبيت الإضافات
-RUN apt-get update && apt-get install -y \
-    git unzip libpng-dev libjpeg-dev libfreetype6-dev \
-    libonig-dev libxml2-dev zip curl \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo pdo_mysql gd mbstring exif pcntl bcmath
+    git unzip curl \
+    libpng-dev libonig-dev libxml2-dev libzip-dev \
+    zip nodejs npm
 
-# تثبيت Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 WORKDIR /app
 
 COPY . .
 
+# Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
 
-RUN php artisan storage:link || true
+# Vite build 🔥
+RUN npm install
+RUN npm run build
+
+# Permissions
+RUN chown -R www-data:www-data storage bootstrap/cache
 
 EXPOSE 8080
-
-CMD php -S 0.0.0.0:8080 -t public
+CMD php artisan serve --host=0.0.0.0 --port=8080
