@@ -94,6 +94,8 @@
                                 <th class="px-2 py-3 w-[110px]">الحالة</th>
                                 <th class="px-2 py-3 w-[110px]">تاريخ الاستلام</th>
                                 <th class="px-2 py-3 w-[170px]">إجراءات</th>
+                                
+
                             </tr>
                         </thead>
 
@@ -118,9 +120,12 @@
                                     {{ $file->diploma_type }}
                                 </td>
 
+
+
                                 <td class="px-2 py-2 text-gray-600 whitespace-nowrap">
                                     {{ \Carbon\Carbon::parse($file->submitted_at)->format('Y-m-d') }}
                                 </td>
+
 
                                 {{-- ✅ Tracking Link --}}
                                 <td class="px-2 py-2 font-bold text-blue-700 whitespace-nowrap">
@@ -185,9 +190,10 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="9" class="px-6 py-10 text-center text-gray-600 font-semibold">
-                                    لا توجد طلبات بعد 📭
-                                </td>
+                                <td colspan="10" class="px-6 py-10 text-center text-gray-600 font-semibold">
+    لا توجد طلبات بعد 📭
+</td>
+
                             </tr>
                         @endforelse
 

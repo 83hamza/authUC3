@@ -1,4 +1,10 @@
 [build]
 builder = "dockerfile"
 
+[phases.install]
+cmds = [
+  "composer install --no-dev --optimize-autoloader",
+  "npm install",
+  "npm run build"
+]
 
