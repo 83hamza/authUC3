@@ -11,18 +11,17 @@ class AdminMiddleware
     /**
      * Handle an incoming request.
      */
-    public function handle(Request $request, Closure $next): Response
-    {
-        // التأكد من أن المستخدم مسجّل الدخول
-        if (!auth()->check()) {
-            return redirect()->route('login');
-        }
-
-        // التأكد من أن المستخدم Admin
-        if (!auth()->user()->is_admin) {
-            abort(403, 'Unauthorized access');
-        }
-
-        return $next($request);
+    public function handle(Request $request, Closure $next)
+{
+    if (!auth()->check()) {
+        return redirect()->route('login');
     }
+
+    if (!in_array(auth()->user()->role, ['admin', 'super_admin'])) {
+        abort(403, 'Unauthorized access');
+    }
+
+    return $next($request);
+}
+
 }

@@ -25,6 +25,10 @@ class StudentFileController extends Controller
     // ✅ عرض الملفات + بحث + Pagination
     public function index(Request $request)
     {
+
+    
+
+
         $search = $request->search;
 
         $files = StudentFile::when($search, function ($q) use ($search) {

@@ -8,19 +8,19 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
         User::updateOrCreate(
-            ['email' => 'admin@uc3.dz'],
-            [
-                'name' => 'Super Admin',
-                'password' => Hash::make('admin123'),
-                'is_admin' => true,
-                'role' => 'super_admin',
-            ]
-        );
+    ['email' => 'admin@uc3.dz'],
+    [
+        'name' => 'Super Admin',
+        'is_admin' => true,
+        'role' => 'super_admin',
+        'password' => User::where('email','admin@uc3.dz')->exists()
+            ? User::where('email','admin@uc3.dz')->first()->password
+            : Hash::make('Admin@12345'),
+    ]
+);
+
     }
 }
