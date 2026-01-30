@@ -20,7 +20,8 @@
                 📂 تتبع ملف الطالب
             </h2>
 
-            <form method="POST" action="{{ route('track.check') }}">
+            <form method="POST" action="{{ route('tracking.check') }}">
+
                 @csrf
 
                 <div class="mb-6 text-right">
