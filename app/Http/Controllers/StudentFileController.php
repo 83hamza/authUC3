@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+dd('STUDENT FILE CONTROLLER LOADED');
 
 use App\Models\StudentFile;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
   
+
 
 
 
@@ -120,38 +122,32 @@ class StudentFileController extends Controller
     }
 
     // ✅ وصل PDF + QR (English Version)
-    public function receipt($id)
-    {
-        $file = StudentFile::findOrFail($id);
+  public function receipt($id)
+{
+    $file = StudentFile::findOrFail($id);
 
-        // ✅ Tracking URL
-        $trackUrl = "https://authUC3.univ-constantine3.dz/tracking?tracking_id=" . $file->tracking_id;
+    $trackUrl = route('track.direct', [
+        'tracking_id' => $file->tracking_id
+    ], true);
 
-        // ✅ QR Code SVG (No Imagick)
-        $qrCode = base64_encode(
-            QrCode::format('svg')->size(130)->generate($trackUrl)
-        );
+    $qrCode = base64_encode(
+        QrCode::format('svg')
+            ->size(130)
+            ->generate($trackUrl)
+    );
 
-        // ✅ Receipt Number Example UC3-2026-000005
-        $year = now()->year;
-        $receiptNumber = "UC3-" . $year . "-" . str_pad($file->id, 6, "0", STR_PAD_LEFT);
+    $receiptNumber = sprintf(
+        'UC3-%s-%06d',
+        now()->year,
+        $file->id
+    );
 
-        // ✅ Convert Status to English Text
-        $statusText = match($file->status) {
-            'processed' => 'Verified',
-            'pending'   => 'Pending',
-            'rejected'  => 'Rejected',
-            default     => $file->status,
-        };
-       
-        $pdf = Pdf::loadView('admin.files.receipt_pdf', compact(
-            'file',
-            'qrCode',
-            'trackUrl',
-            'receiptNumber',
-            'statusText'
-        ))->setPaper('a4', 'portrait');
+    return Pdf::loadView(
+        'admin.files.receipt',
+        compact('file', 'trackUrl', 'qrCode', 'receiptNumber')
+    )->download("receipt_{$receiptNumber}.pdf");
+}
 
-        return $pdf->download("receipt_{$receiptNumber}.pdf");
-    }
+
+
 }
