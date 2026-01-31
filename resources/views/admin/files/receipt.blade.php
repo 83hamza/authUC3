@@ -119,9 +119,6 @@
 </head>
 
 <body>
-<h1 style="color:red">USING NEW TRACK URL</h1>
-
-<p>{{ $trackUrl }}</p>
 
 
 
