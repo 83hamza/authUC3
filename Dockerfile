@@ -28,8 +28,3 @@ RUN npm install
 RUN npm run build
 
 # Clear & rebuild Laravel cache
-RUN php artisan config:clear \
- && php artisan cache:clear \
- && php artisan route:clear \
- && php artisan view:clear \
- && php artisan config:cache
