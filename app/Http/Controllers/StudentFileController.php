@@ -142,7 +142,7 @@ class StudentFileController extends Controller
     );
 
     return Pdf::loadView(
-    'admin.files.receipt_pdf_v2',
+    'admin.files.receipt_pdf',
     compact('file', 'trackUrl', 'qrCode', 'receiptNumber')
 );
 
