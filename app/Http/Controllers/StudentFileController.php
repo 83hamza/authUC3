@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-dd('STUDENT FILE CONTROLLER LOADED');
 
 use App\Models\StudentFile;
 use Illuminate\Http\Request;
