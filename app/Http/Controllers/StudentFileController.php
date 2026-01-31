@@ -121,7 +121,7 @@ class StudentFileController extends Controller
     }
 
     // ✅ وصل PDF + QR (English Version)
-  public function receipt($id)
+ public function receipt($id)
 {
     $file = StudentFile::findOrFail($id);
 
@@ -130,7 +130,7 @@ class StudentFileController extends Controller
     ], true);
 
     $qrCode = base64_encode(
-        QrCode::format('svg')
+        \QrCode::format('svg')
             ->size(130)
             ->generate($trackUrl)
     );
@@ -142,12 +142,12 @@ class StudentFileController extends Controller
     );
 
     return Pdf::loadView(
-    'admin.files.receipt_pdf',
-    compact('file', 'trackUrl', 'qrCode', 'receiptNumber')
-);
+        'admin.files.receipt', // ⚠️ هذا هو المهم
+        compact('file', 'trackUrl', 'qrCode', 'receiptNumber')
+    )->download("receipt_{$receiptNumber}.pdf");
+}
 
 }
 
 
 
-}
