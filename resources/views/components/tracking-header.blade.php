@@ -20,7 +20,7 @@
      alt="University Logo"
      class="mx-auto h-20 mb-2">
                 <div class="font-bold text-lg">
-                    Université Constantine 3
+                   University of Constantine 3
                 </div>
                 <div class="text-sm text-gray-600">
                     Salah Boubnider
