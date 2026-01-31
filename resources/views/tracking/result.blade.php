@@ -44,7 +44,7 @@
 
           
 
-            <h2 class="font-bold text-lg">Université Constantine 3</h2>
+            <h2 class="font-bold text-lg">University of Constantine 3</h2>
             <p class="text-sm text-gray-600">Salah Boubnider</p>
         </div>
 <!-- 🔴 LEFT (ENGLISH) -->
@@ -140,9 +140,13 @@
 
 </div>
 <p class="mt-10 text-center text-sm text-gray-500">
-    هذه الصفحة مخصصة للاطلاع فقط، ولا تُعد وثيقة رسمية.
-    <br>
-    في حال وجود أي إشكال، يرجى التقرب من مصلحة الشهادات والمعادلات.
+   {{-- ✅ Footer --}}
+    <footer class="bg-white border-t py-4 text-center text-sm text-gray-500">
+        © {{ date('Y') }} University of Constantine 3 – Salah Boubnider  
+        <br>
+        Vice-Rectorate for Higher Education Certificates and Equivalency Office
+    </footer>
+  
 </body>
 </html>
 
