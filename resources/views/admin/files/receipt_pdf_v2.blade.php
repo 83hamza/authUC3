@@ -119,8 +119,8 @@
 </head>
 
 <body>
+<h1 style="color:red">USING NEW TRACK URL</h1>
 
-<h1 style="color:red">PDF VERSION V2</h1>
 <p>{{ $trackUrl }}</p>
 
 
@@ -162,7 +162,7 @@
     <div class="qr">
         <div style="font-weight:bold;">Scan QR Code to Track Your File</div>
         <img src="data:image/svg+xml;base64,{{ $qrCode }}" alt="QR Code">
-        <div class="link">{{ $trackUrl }}</div>
+        <h1 style="color:red"> <div class="link">{{ $trackUrl }}</div></h1>
     </div>
 
     <div class="footer">
