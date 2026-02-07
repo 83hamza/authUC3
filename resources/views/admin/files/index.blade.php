@@ -6,43 +6,64 @@
             {{-- ================= Header ================= --}}
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
 
-                <div class="flex justify-between items-center">
-    <h1 class="text-3xl font-bold flex items-center gap-2">
-        📁 قائمة الطلبة
-    </h1>
+                {{-- Title + Search --}}
+                
+                    <p class="text-gray-600 mt-1">
+                        إدارة ملفات الطلبة وتتبع حالتهم بسهولة
+                    </p>
 
-    <div class="flex gap-2">
-        <!-- PDF -->
-        <a href="#" class="bg-red-600 text-white px-5 py-2 rounded-lg shadow hover:bg-red-700 flex items-center gap-2">
-            📄 PDF
-        </a>
+                    {{-- Search --}}
+                    <form method="GET" action="{{ route('admin.files.index') }}" class="mt-4">
+                        <div class="relative w-full max-w-md">
+                            <input
+                                type="text"
+                                name="search"
+                                value="{{ request('search') }}"
+                                placeholder="🔍 الاسم أو اللقب أو رقم التتبع"
+                                class="w-full px-4 py-2 rounded-xl border border-gray-300 shadow-sm
+                                       focus:ring-2 focus:ring-sky-500 focus:outline-none"
+                            >
 
-        <!-- XLSX -->
-        <a href="#" class="bg-green-600 text-white px-5 py-2 rounded-lg shadow hover:bg-green-700 flex items-center gap-2">
-            📗 XLSX
-        </a>
+                            @if(request('search'))
+                                <a href="{{ route('admin.files.index') }}"
+                                   class="absolute left-3 top-1/2 -translate-y-1/2 text-red-600 font-bold">
+                                    ✖
+                                </a>
+                            @endif
+                        </div>
+                    </form>
+                </div>
 
-        <!-- Add -->
-        <a href="{{ route('admin.files.create') }}" class="bg-blue-600 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-700 flex items-center gap-2">
-            ➕ إضافة طالب جديد
-        </a>
-    </div>
-</div>
+                {{-- Buttons --}}
+                <div class="w-full lg:w-auto">
+                    <div class="flex justify-end">
+                        <div class="flex gap-3 overflow-x-auto whitespace-nowrap pb-2 px-2 py-2
+                                    bg-white/40 rounded-xl border border-white/60 shadow-sm">
 
-<!-- ✅ البطاقة تحت العنوان وفي الوسط -->
-<div class="flex justify-center mt-6">
-    <div class="bg-white shadow-lg rounded-xl px-10 py-4 flex items-center gap-4 border border-gray-200">
-        <span class="text-2xl">👁️</span>
+                            {{-- PDF --}}
+                            <a href="{{ route('admin.files.export.pdf') }}"
+                               class="px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-bold
+                                      shadow hover:bg-red-700 transition flex items-center gap-2">
+                                🧾 PDF
+                            </a>
 
-        <span class="text-lg font-bold text-gray-700">
-            عدد الزائرين الإجمالي :
-        </span>
+                            {{-- Excel --}}
+                            <a href="{{ route('admin.files.export.excel') }}"
+                               class="px-4 py-2 rounded-lg bg-green-600 text-white text-sm font-bold
+                                      shadow hover:bg-green-700 transition flex items-center gap-2">
+                                📄 XLSX
+                            </a>
 
-        <span class="text-xl font-extrabold text-blue-600">
-            {{ $totalVisits }}
-        </span>
-    </div>
-</div>
+                            {{-- Create --}}
+                            <a href="{{ route('admin.files.create') }}"
+                               class="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-bold
+                                      shadow hover:bg-blue-700 transition flex items-center gap-2">
+                                ➕ إضافة طالب جديد
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
