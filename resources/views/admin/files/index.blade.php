@@ -4,82 +4,94 @@
         <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-10">
 
             {{-- ================= Header ================= --}}
-            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
+            <div class="flex flex-col gap-6 mb-8">
 
-                {{-- Title + Search --}}
-                <div class="w-full lg:w-1/2">
-                    <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
-                        📁 قائمة الطلبة
-                    </h1>
-                                                
+                {{-- Title + Buttons --}}
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
 
+                    {{-- Title + Search --}}
+                    <div class="w-full lg:w-1/2">
+                        <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
+                            📁 قائمة الطلبة
+                        </h1>
 
-                    <p class="text-gray-600 mt-1">
-                        إدارة ملفات الطلبة وتتبع حالتهم بسهولة
-                    </p>
+                        <p class="text-gray-600 mt-1">
+                            إدارة ملفات الطلبة وتتبع حالتهم بسهولة
+                        </p>
 
-                    {{-- Search --}}
-                    <form method="GET" action="{{ route('admin.files.index') }}" class="mt-4">
-                        <div class="relative w-full max-w-md">
-                            <input
-                                type="text"
-                                name="search"
-                                value="{{ request('search') }}"
-                                placeholder="🔍 الاسم أو اللقب أو رقم التتبع"
-                                class="w-full px-4 py-2 rounded-xl border border-gray-300 shadow-sm
-                                       focus:ring-2 focus:ring-sky-500 focus:outline-none"
-                            >
+                        {{-- Search --}}
+                        <form method="GET" action="{{ route('admin.files.index') }}" class="mt-4">
+                            <div class="relative w-full max-w-md">
+                                <input
+                                    type="text"
+                                    name="search"
+                                    value="{{ request('search') }}"
+                                    placeholder="🔍 الاسم أو اللقب أو رقم التتبع"
+                                    class="w-full px-4 py-2 rounded-xl border border-gray-300 shadow-sm
+                                           focus:ring-2 focus:ring-sky-500 focus:outline-none"
+                                >
 
-                            @if(request('search'))
-                                <a href="{{ route('admin.files.index') }}"
-                                   class="absolute left-3 top-1/2 -translate-y-1/2 text-red-600 font-bold">
-                                    ✖
+                                @if(request('search'))
+                                    <a href="{{ route('admin.files.index') }}"
+                                       class="absolute left-3 top-1/2 -translate-y-1/2 text-red-600 font-bold">
+                                        ✖
+                                    </a>
+                                @endif
+                            </div>
+                        </form>
+                    </div>
+
+                    {{-- Buttons --}}
+                    <div class="w-full lg:w-auto">
+                        <div class="flex justify-end">
+                            <div class="flex gap-3 overflow-x-auto whitespace-nowrap pb-2 px-2 py-2
+                                        bg-white/40 rounded-xl border border-white/60 shadow-sm">
+
+                                {{-- PDF --}}
+                                <a href="{{ route('admin.files.export.pdf') }}"
+                                   class="px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-bold
+                                          shadow hover:bg-red-700 transition flex items-center gap-2">
+                                    🧾 PDF
                                 </a>
-                            @endif
+
+                                {{-- Excel --}}
+                                <a href="{{ route('admin.files.export.excel') }}"
+                                   class="px-4 py-2 rounded-lg bg-green-600 text-white text-sm font-bold
+                                          shadow hover:bg-green-700 transition flex items-center gap-2">
+                                    📄 XLSX
+                                </a>
+
+                                {{-- Create --}}
+                                <a href="{{ route('admin.files.create') }}"
+                                   class="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-bold
+                                          shadow hover:bg-blue-700 transition flex items-center gap-2">
+                                    ➕ إضافة طالب جديد
+                                </a>
+
+                            </div>
                         </div>
-                    </form>
+                    </div>
+
                 </div>
-<div class="flex justify-center mt-6 mb-6">
-    <div class="bg-white shadow-lg rounded-xl px-8 py-4 flex items-center gap-4 border border-gray-200">
-        <span class="text-2xl">👁️</span>
 
-        <span class="text-lg font-bold text-gray-700">
-           : عدد الزائرين الإجمالي 
-        </span>
+                {{-- Visitors Card Center --}}
+                <div class="flex justify-center">
+                    <div class="bg-white shadow-xl rounded-2xl px-10 py-4 flex items-center gap-4 border border-gray-200">
 
-        <span class="text-xl font-extrabold text-blue-600">
-            {{ $totalVisits }}
-        </span>
-    </div>
-</div>
-                {{-- Buttons --}}
-                <div class="w-full lg:w-auto">
-                    <div class="flex justify-end">
-                        <div class="flex gap-3 overflow-x-auto whitespace-nowrap pb-2 px-2 py-2
-                                    bg-white/40 rounded-xl border border-white/60 shadow-sm">
-
-                            {{-- PDF --}}
-                            <a href="{{ route('admin.files.export.pdf') }}"
-                               class="px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-bold
-                                      shadow hover:bg-red-700 transition flex items-center gap-2">
-                                🧾 PDF
-                            </a>
-
-                            {{-- Excel --}}
-                            <a href="{{ route('admin.files.export.excel') }}"
-                               class="px-4 py-2 rounded-lg bg-green-600 text-white text-sm font-bold
-                                      shadow hover:bg-green-700 transition flex items-center gap-2">
-                                📄 XLSX
-                            </a>
-
-                            {{-- Create --}}
-                            <a href="{{ route('admin.files.create') }}"
-                               class="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-bold
-                                      shadow hover:bg-blue-700 transition flex items-center gap-2">
-                                ➕ إضافة طالب جديد
-                            </a>
-
+                        <div class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 text-2xl">
+                            👁️
                         </div>
+
+                        <div class="text-center">
+                            <p class="text-gray-600 font-bold text-lg">
+                                عدد الزائرين الإجمالي
+                            </p>
+
+                            <p class="text-3xl font-extrabold text-blue-600">
+                                {{ $totalVisits }}
+                            </p>
+                        </div>
+
                     </div>
                 </div>
 
@@ -96,7 +108,6 @@
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200 w-full">
                 <div class="overflow-x-auto">
 
-
                     <table dir="rtl" class="min-w-full text-[13px] text-center">
 
                         <thead class="bg-sky-200 text-black font-bold text-[13px]">
@@ -110,8 +121,6 @@
                                 <th class="px-2 py-3 w-[110px]">الحالة</th>
                                 <th class="px-2 py-3 w-[110px]">تاريخ الاستلام</th>
                                 <th class="px-2 py-3 w-[170px]">إجراءات</th>
-                                
-
                             </tr>
                         </thead>
 
@@ -136,27 +145,25 @@
                                     {{ $file->diploma_type }}
                                 </td>
 
-
-
                                 <td class="px-2 py-2 text-gray-600 whitespace-nowrap">
                                     {{ \Carbon\Carbon::parse($file->submitted_at)->format('Y-m-d') }}
                                 </td>
 
-
-                                {{-- ✅ Tracking Link --}}
+                                {{-- Tracking Link --}}
                                 <td class="px-2 py-2 font-bold text-blue-700 whitespace-nowrap">
                                     <a href="{{ route('track.direct', $file->tracking_id) }}"
                                        target="_blank"
                                        class="underline hover:text-blue-900 transition">
-                                       <div class="flex flex-col items-center gap-1">
-    <span class="font-bold text-blue-700">
-        {{ $file->tracking_id }}
-    </span>
 
-    <span class="px-2 py-1 rounded bg-gray-200 text-xs font-bold text-gray-800">
-        👁 {{ \App\Models\TrackingVisit::where('tracking_id', $file->tracking_id)->count() }}
-    </span>
-</div>
+                                        <div class="flex flex-col items-center gap-1">
+                                            <span class="font-bold text-blue-700">
+                                                {{ $file->tracking_id }}
+                                            </span>
+
+                                            <span class="px-2 py-1 rounded bg-gray-200 text-xs font-bold text-gray-800">
+                                                👁 {{ \App\Models\TrackingVisit::where('tracking_id', $file->tracking_id)->count() }}
+                                            </span>
+                                        </div>
 
                                     </a>
                                 </td>
@@ -216,9 +223,8 @@
                         @empty
                             <tr>
                                 <td colspan="10" class="px-6 py-10 text-center text-gray-600 font-semibold">
-    لا توجد طلبات بعد 📭
-</td>
-
+                                    لا توجد طلبات بعد 📭
+                                </td>
                             </tr>
                         @endforelse
 
