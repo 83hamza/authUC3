@@ -31,7 +31,7 @@ class StudentFileController extends Controller
     
        
         $search = $request->search;
-
+        $totalVisits = TrackingVisit::count();
         $files = StudentFile::when($search, function ($q) use ($search) {
             $q->where('first_name', 'like', "%{$search}%")
               ->orWhere('last_name', 'like', "%{$search}%")
@@ -40,8 +40,9 @@ class StudentFileController extends Controller
         ->orderBy('id', 'asc')
         ->paginate(20)
         ->withQueryString();
-         $totalVisits = TrackingVisit::count();
+     
         return view('admin.files.index', compact('files'));
+           
     }
 
     // ✅ صفحة إضافة طالب جديد

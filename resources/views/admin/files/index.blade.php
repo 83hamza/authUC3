@@ -11,6 +11,24 @@
                     <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
                         📁 قائمة الطلبة
                     </h1>
+                                                  <div style="
+                                          background:#ffffff;
+                                           padding:15px 25px;
+                                           border-radius:12px;
+                                           display:inline-block;
+    margin:15px 0;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    font-size:18px;
+    font-weight:bold;
+">
+    👁️ عدد الزائرين الإجمالي:
+    <span style="color:#2563eb; font-size:22px;">
+        {{ $totalVisits }}
+    </span>
+</div>
+
+
+
                     <p class="text-gray-600 mt-1">
                         إدارة ملفات الطلبة وتتبع حالتهم بسهولة
                     </p>
@@ -80,20 +98,7 @@
             {{-- ================= Table ================= --}}
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200 w-full">
                 <div class="overflow-x-auto">
-<div class="mb-6">
-    <div class="bg-white rounded-xl shadow-md p-4 flex items-center justify-between border border-gray-200">
-        <div>
-            <p class="text-gray-500 text-sm">عدد الزائرين الإجمالي</p>
-            <h2 class="text-2xl font-bold text-blue-700">
-                {{ $totalVisits }}
-            </h2>
-        </div>
 
-        <div class="bg-blue-100 text-blue-700 p-3 rounded-full text-xl">
-            👁️
-        </div>
-    </div>
-</div>
 
                     <table dir="rtl" class="min-w-full text-[13px] text-center">
 
