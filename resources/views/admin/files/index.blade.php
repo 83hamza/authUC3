@@ -11,17 +11,20 @@
                     <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
                         📁 قائمة الطلبة
                     </h1>
-                                                <div class="flex justify-center my-6">
-    <div class="bg-white shadow-md rounded-xl px-6 py-3 flex items-center gap-3 border">
-        <span class="text-xl">👁️</span>
+                                                <div class="flex justify-center mt-6 mb-6">
+    <div class="bg-white shadow-lg rounded-xl px-8 py-4 flex items-center gap-4 border border-gray-200">
+        <span class="text-2xl">👁️</span>
+
         <span class="text-lg font-bold text-gray-700">
             عدد الزائرين الإجمالي:
         </span>
-        <span class="text-lg font-extrabold text-blue-600">
+
+        <span class="text-xl font-extrabold text-blue-600">
             {{ $totalVisits }}
         </span>
     </div>
 </div>
+
 
 
 
