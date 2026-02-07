@@ -87,9 +87,10 @@
                                 عدد الزائرين الإجمالي
                             </p>
 
-                            <p class="text-3xl font-extrabold text-blue-600">
-                                {{ $totalVisits }}
-                            </p>
+                            <span id="totalVisitsCounter" class="text-xl font-extrabold text-blue-600">
+    {{ $totalVisits }}
+</span>
+
                         </div>
 
                     </div>
@@ -264,3 +265,20 @@
     </script>
 
 </x-app-layout>
+<script>
+    function updateVisitsCount() {
+        fetch("{{ route('admin.visits.count') }}")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("totalVisitsCounter").innerText = data.totalVisits;
+            })
+            .catch(error => console.error("Error fetching visits count:", error));
+    }
+
+    // تحديث أول مرة مباشرة
+    updateVisitsCount();
+
+    // تحديث كل 10 ثواني (يمكن تغيير الرقم)
+    setInterval(updateVisitsCount, 10000);
+</script>
+

@@ -101,6 +101,12 @@ Route::prefix('admin')
 
         Route::get('/files/{file}/receipt', [StudentFileController::class, 'receipt'])
             ->name('files.receipt');
+            Route::get('/admin/visits-count', function () {
+    return response()->json([
+        'totalVisits' => \App\Models\TrackingVisit::count()
+    ]);
+})->name('admin.visits.count');
+
 
         /*
         |-------------------------
