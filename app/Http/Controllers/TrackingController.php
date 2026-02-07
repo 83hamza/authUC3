@@ -40,23 +40,24 @@ class TrackingController extends Controller
     }
 
     // ✅ تتبع مباشر عبر الرابط
-    public function direct(string $tracking_id, Request $request)
-    {
-        $file = StudentFile::where('tracking_id', $tracking_id)->first();
+  public function direct(string $tracking_id)
+{
+    $file = StudentFile::where('tracking_id', $tracking_id)->first();
 
-        if (!$file) {
-            return view('tracking.form', [
-                'error' => 'رقم التتبع غير موجود'
-            ]);
-        }
-
-        // ✅ تسجيل زيارة
-        TrackingVisit::create([
-            'tracking_id' => $file->tracking_id,
-            'ip_address'  => $request->ip(),
-            'user_agent'  => $request->userAgent(),
+    if (! $file) {
+        return view('tracking.form', [
+            'error' => 'رقم التتبع غير موجود'
         ]);
-
-        return view('tracking.result', compact('file'));
     }
+
+    // تسجيل زيارة جديدة
+    TrackingVisit::create([
+        'tracking_id' => $tracking_id,
+        'ip' => request()->ip(),
+        'user_agent' => request()->userAgent(),
+    ]);
+
+    return view('tracking.result', compact('file'));
+}
+
 }
