@@ -26,25 +26,23 @@ class StudentFileController extends Controller
 
     // ✅ عرض الملفات + بحث + Pagination
     public function index(Request $request)
-    {
+{
+    $search = $request->search;
 
-    
-       
-        $search = $request->search;
-       $totalVisits = \App\Models\TrackingVisit::count();
+    $totalVisits = TrackingVisit::count();
 
-        $files = StudentFile::when($search, function ($q) use ($search) {
-            $q->where('first_name', 'like', "%{$search}%")
-              ->orWhere('last_name', 'like', "%{$search}%")
-              ->orWhere('tracking_id', 'like', "%{$search}%");
-        })
-        ->orderBy('id', 'asc')
-        ->paginate(20)
-        ->withQueryString();
-     
-        return view('admin.files.index', compact('files'));
-           
-    }
+    $files = StudentFile::when($search, function ($q) use ($search) {
+        $q->where('first_name', 'like', "%{$search}%")
+          ->orWhere('last_name', 'like', "%{$search}%")
+          ->orWhere('tracking_id', 'like', "%{$search}%");
+    })
+    ->orderBy('id', 'asc')
+    ->paginate(20)
+    ->withQueryString();
+
+    return view('admin.files.index', compact('files', 'totalVisits'));
+}
+
 
     // ✅ صفحة إضافة طالب جديد
     public function create()
