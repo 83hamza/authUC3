@@ -132,7 +132,16 @@
                                     <a href="{{ route('track.direct', $file->tracking_id) }}"
                                        target="_blank"
                                        class="underline hover:text-blue-900 transition">
-                                        {{ $file->tracking_id }}
+                                       <div class="flex flex-col items-center gap-1">
+    <span class="font-bold text-blue-700">
+        {{ $file->tracking_id }}
+    </span>
+
+    <span class="px-2 py-1 rounded bg-gray-200 text-xs font-bold text-gray-800">
+        👁 {{ \App\Models\TrackingVisit::where('tracking_id', $file->tracking_id)->count() }}
+    </span>
+</div>
+
                                     </a>
                                 </td>
 
