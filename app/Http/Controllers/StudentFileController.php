@@ -9,6 +9,7 @@ use App\Exports\StudentFilesExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Models\TrackingVisit;
 
   
 
@@ -28,8 +29,7 @@ class StudentFileController extends Controller
     {
 
     
-
-
+       
         $search = $request->search;
 
         $files = StudentFile::when($search, function ($q) use ($search) {
@@ -40,7 +40,7 @@ class StudentFileController extends Controller
         ->orderBy('id', 'asc')
         ->paginate(20)
         ->withQueryString();
-
+         $totalVisits = TrackingVisit::count();
         return view('admin.files.index', compact('files'));
     }
 
