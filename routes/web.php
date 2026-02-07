@@ -66,6 +66,12 @@ Route::get('/dashboard', function () {
 | Admin Area (auth + admin)
 |--------------------------------------------------------------------------
 */
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/admin/visits-count', [\App\Http\Controllers\StudentFileController::class, 'getVisitsCount'])
+        ->name('admin.visits.count');
+
+});
 
 Route::prefix('admin')
     ->name('admin.')
@@ -101,11 +107,7 @@ Route::prefix('admin')
 
         Route::get('/files/{file}/receipt', [StudentFileController::class, 'receipt'])
             ->name('files.receipt');
-            Route::get('/admin/visits-count', function () {
-    return response()->json([
-        'totalVisits' => \App\Models\TrackingVisit::count()
-    ]);
-})->name('admin.visits.count');
+           
 
 
         /*

@@ -146,6 +146,14 @@ class StudentFileController extends Controller
         compact('file', 'trackUrl', 'qrCode', 'receiptNumber')
     )->download("receipt_{$receiptNumber}.pdf");
 }
+public function getVisitsCount()
+{
+    $totalVisits = TrackingVisit::count();
+
+    return response()->json([
+        'totalVisits' => $totalVisits
+    ]);
+}
 
 }
 
