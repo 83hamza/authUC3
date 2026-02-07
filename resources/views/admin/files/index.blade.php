@@ -7,7 +7,13 @@
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
 
                 {{-- Title + Search --}}
-                
+                <div class="w-full lg:w-1/2">
+                    <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
+                        📁 قائمة الطلبة
+                    </h1>
+                                                
+
+
                     <p class="text-gray-600 mt-1">
                         إدارة ملفات الطلبة وتتبع حالتهم بسهولة
                     </p>
@@ -33,7 +39,19 @@
                         </div>
                     </form>
                 </div>
+<div class="flex justify-center mt-6 mb-6">
+    <div class="bg-white shadow-lg rounded-xl px-8 py-4 flex items-center gap-4 border border-gray-200">
+        <span class="text-2xl">👁️</span>
 
+        <span class="text-lg font-bold text-gray-700">
+           : عدد الزائرين الإجمالي 
+        </span>
+
+        <span class="text-xl font-extrabold text-blue-600">
+            {{ $totalVisits }}
+        </span>
+    </div>
+</div>
                 {{-- Buttons --}}
                 <div class="w-full lg:w-auto">
                     <div class="flex justify-end">
